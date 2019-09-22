@@ -15,10 +15,10 @@ class BurpExtender(IBurpExtender,IScannerCheck):
     def registerExtenderCallbacks(self, callbacks):
         self._callbacks = callbacks
         self._helpers = callbacks.getHelpers()
-        callbacks.setExtensionName("VPN SSL IMPULSE 101 v1.0")
+        callbacks.setExtensionName("Pulse SSL VPN Arbitrary File Read Scanner")
         dout = PrintWriter(callbacks.getStdout(), True)
         derr = PrintWriter(callbacks.getStderr(), True)
-        dout.println("VPN SSL IMPULSE 101 | by twitter.com/0x94")
+        dout.println("Pulse SSL VPN Arbitrary File Read Scanner | by twitter.com/0x94")
         callbacks.registerScannerCheck(self)
         
     def _get_matches(self, response, match):
