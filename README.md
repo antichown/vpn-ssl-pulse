@@ -5,16 +5,16 @@ Pulse SSL VPN Arbitrary File Read burp extension
 
 Requirements:
 Burp Suite Professional, Jython 2.5 or later standalone: http://www.jython.org/downloads.html
-
-Manual installation:
-'Extender'->'Options'
-Click 'Select file' under 'Python environment'
-Choose jython-standalone-2.5.jar
-'Extender'->'Extensions'
-Click 'Add'
-Change 'Extension Type' to Python
-Choose impulse101.py
-Done!
+<br>
+Manual installation:<br>
+'Extender'->'Options'<br>
+Click 'Select file' under 'Python environment'<br>
+Choose jython-standalone-2.5.jar<br>
+'Extender'->'Extensions'<br>
+Click 'Add'<br>
+Change 'Extension Type' to Python<br>
+Choose impulse101.py<br>
+Done!<br>
 
 
 <img src=https://raw.githubusercontent.com/antichown/vpn-ssl-pulse/master/vpn2.png>
