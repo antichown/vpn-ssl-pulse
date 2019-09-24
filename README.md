@@ -1,9 +1,7 @@
 
 
-# vpn-ssl-pulse
-Pulse SSL VPN Arbitrary File Read burp extension
-
-Requirements:
+Pulse SSL VPN Arbitrary File Read Scanner<br>
+Requirements:<br>
 Burp Suite Professional, Jython 2.5 or later standalone: http://www.jython.org/downloads.html
 <br>
 Manual installation:<br>
@@ -20,6 +18,9 @@ Done!<br>
 <img src=https://raw.githubusercontent.com/antichown/vpn-ssl-pulse/master/vpn2.png>
 <br><br>
 <img src=https://raw.githubusercontent.com/antichown/vpn-ssl-pulse/master/new2.png>
+<br>
+* CVE-2019-11510 <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11510">https://nvd.nist.gov/vuln/detail/CVE-2019-11510</a>
+<br>
 
 Original Discovery: Orange Tsai, Meh Chang
 Authors: Justin Wagner, Alyssa Herrera
