@@ -14,8 +14,6 @@ Change 'Extension Type' to Python<br>
 Choose impulse101.py<br>
 Done!<br>
 
-
-<img src=https://raw.githubusercontent.com/antichown/vpn-ssl-pulse/master/vpn2.png>
 <br><br>
 <img src=https://raw.githubusercontent.com/antichown/vpn-ssl-pulse/master/new2.png>
 <br>
