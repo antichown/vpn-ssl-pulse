@@ -1,6 +1,6 @@
 
 
-Pulse SSL VPN Arbitrary File Read Scanner<br>
+<b><h3>Pulse SSL VPN Arbitrary File Read Scanner</h3></b><br><br>
 Requirements:<br>
 Burp Suite Professional, Jython 2.5 or later standalone: http://www.jython.org/downloads.html
 <br>
